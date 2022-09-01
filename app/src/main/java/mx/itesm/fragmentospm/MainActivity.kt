@@ -1,11 +1,15 @@
 package mx.itesm.fragmentospm
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 
-class MainActivity : AppCompatActivity() {
+// podemos heredar de sólo 1 clase
+// podemos implementar cualquier cantidad de interfaces
+class MainActivity : AppCompatActivity(), PerritoFragment.Callback {
 
     lateinit var datosFragment: DatosFragment
     lateinit var perritoFragment: PerritoFragment
@@ -72,5 +76,19 @@ class MainActivity : AppCompatActivity() {
     companion object {
 
         private const val TAG = "fragmentito"
+    }
+
+    override fun ejecutar() {
+        Toast.makeText(
+            this,
+            "HOLA DESDE LA ACTIVIDAD",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    fun irARecyclerActivity(view : View?) {
+
+        val intent = Intent(this, RecyclerActivity::class.java)
+        startActivity(intent)
     }
 }
