@@ -1,5 +1,6 @@
 package mx.itesm.fragmentospm
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +8,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class PerritoAdapter(var perritos : ArrayList<String>)
+class PerritoAdapter(var perritos : ArrayList<String>,
+                    var listener : View.OnClickListener)
     : RecyclerView.Adapter<PerritoAdapter.PerritoViewHolder>() {
 
     // 1era cosa que hay que hacer -
@@ -38,7 +40,16 @@ class PerritoAdapter(var perritos : ArrayList<String>)
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.row, parent, false)
 
-        return PerritoViewHolder(view)
+        view.setOnClickListener(listener)
+
+        val viewHolder = PerritoViewHolder(view)
+
+        viewHolder.boton.setOnClickListener{
+
+            Log.wtf("BOTON", "HOLA DESDE UN ROW");
+        }
+
+        return viewHolder
     }
 
     // momento de asociación de vista con datos
